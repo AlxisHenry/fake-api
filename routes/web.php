@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [ApiController::class, 'TokenIsMissing'])->name('token.missing');
+Route::get('/{token}', [ApiController::class, 'ValidToken'])->name('token.valid');
+Route::get('/{token}/password', [ApiController::class, 'PasswordSecurity'])->name('api.password.get');
+
